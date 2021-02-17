@@ -1,5 +1,7 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
+import {testAPI, statusChange, login, loadFbApi, checkLoginState} from "../utils/helpers";
+
 
 class Login extends React.Component {
     state = {
@@ -83,11 +85,36 @@ class Login extends React.Component {
                         .catch(err => console.log(err))
                     })
                     .then(() => {
-                        setTimeout(() => {
-                            this.setState({submitRedirectFb: true, hidden: true})
-                        }, 1000)
+                        let cookie = document.cookie.match(new RegExp('(^| )' + 'token' + '=([^;]+)'));
+                        if (cookie) {
+                            loadFbApi()
+                            .then(() => {
+                            let fire = checkLoginState.bind(this)
+                            fire()
+                            .then(async (response) => {
+                                let fire2 = statusChange.bind(this)
+                                fire2(response)
+                                .then(access => {
+                                console.log('a',access)
+                                if (access) {
+                                    testAPI()
+                                    .then(() => {
+                                        if(this.state.accessToken.length > 1) {
+                                            setTimeout(() => {
+                                                this.setState({submitRedirectFb: true, hidden: true})
+                                            }, 1000)
+                                        }
+                                    })
+                                    .catch(err => console.log('err with test call', err))
+                                    }
+                                })
+                                .catch(err => console.log('err with status change', err))
+                            })
+                            .catch(err => console.log('err with check login', err))
+                        })
+                        }
                     })
-                    .catch(err => console.log(err))
+                    
                 } else {
                     //set error message
                     //delete cookie
@@ -103,7 +130,7 @@ class Login extends React.Component {
         const {hidden, email, password, submitRedirectFb, invalidLogin, errorMsg} = this.state;
         return (
             <React.Fragment>
-                {submitRedirectFb === true && invalidLogin === false ? <Redirect to="/fb" /> : null}
+                {submitRedirectFb === true && invalidLogin === false ? <Redirect to="/dashboard" /> : null}
                 <h1>Sign In</h1>
                 <span className="alert">{errorMsg}</span>
                 <label>Email:</label>

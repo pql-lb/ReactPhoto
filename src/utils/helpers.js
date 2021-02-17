@@ -47,17 +47,15 @@ export function login() {
 export function statusChange(response) {
      return new Promise(async (resolve, rej) => {
        if (response.status === 'unknown'||response.status === 'not_authorized') {  
-           this.login()
+           login()
            .then(access => {
-             this.props.redirectPageLogout(false)
-             this.props.setAccess(access)
+             this.setState({accessToken: access})
              localStorage.setItem('access', access)
              resolve(access)
            })
        } else {
          //Should NOT be showing btn in this condition
-           this.props.redirectPageLogout(false)
-           this.props.setAccess(response.authResponse.accessToken)
+           this.setState({accessToken: response.authResponse.accessToken})
            localStorage.setItem('access', response.authResponse.accessToken)
            resolve(response.authResponse.accessToken)
        }            
