@@ -41,7 +41,7 @@ export function login() {
          console.log('logged in', res.authResponse.accessToken)
          let access = res.authResponse.accessToken;
          resolve2(access)
-       })
+       }, {scope: 'read_insights, manage_pages'})
      })
    }
 export function statusChange(response) {
@@ -65,10 +65,10 @@ export function testAPI() {
      return new Promise((res, rej) => {
        window.FB.getLoginStatus(resp => {
          console.log(resp)
-           window.FB.api('/me/accounts?fields=id', {access_token: resp.authResponse.accessToken}, (response) => {
+           window.FB.api('/me/accounts', {access_token: resp.authResponse.accessToken}, (response) => {
                console.log('RESPONSE',response)
                if (response) {
-                 res()
+                 res(response)
                } else {
                  rej()
                }

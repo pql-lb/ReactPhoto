@@ -1,7 +1,7 @@
 .form {
     display: flex;
     justify-content: center;
-    height: 85vh;
+    height: 95vh;
     align-items: center;
 }
 .alert {
@@ -46,4 +46,13 @@
     color: white; 
     border: none; 
     border-radius: 5px;
+}
+
+.btnContainCol {
+    display: flex; flex-direction: column;
+}
+.loginAlert {
+    margin-top: 10px;
+    color: black;
+    font-family: poppins, sans-serif;        
 }

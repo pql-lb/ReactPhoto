@@ -1,0 +1,39 @@
+:root {
+    --font: rgb(50, 15, 107);
+}
+
+.list {
+    height: 100vh; width: 300px; 
+    position: fixed; top: 0; left: 0;
+    background: rgba(255, 255, 255, 0.25); 
+    font-family: poppins;
+    z-index: 20; 
+}
+.blur {
+    height: 100vh; width: 300px; position: fixed; top: 0; left: 0;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);  opacity: 1;
+    z-index: 19;
+}
+.list ul {
+    display: flex; flex-direction: column;
+    width: 250px;
+    height: 700px;
+    z-index: 9000000;
+    margin-top: 50px;
+}
+.list ul li {
+    text-decoration: none;
+    padding: 20px;
+    font-size: 18px;
+    list-style: none;
+}
+.list ul li a {
+    text-decoration: none;
+    color: var(--font);
+}
+
+.burgerIcon {
+    position: fixed;
+    top: 0; left: 0;
+}
