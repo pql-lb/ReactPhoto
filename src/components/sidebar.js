@@ -4,6 +4,9 @@ import List from './list';
 import {drawerChange} from '../reducers/sidebar';
 import { connect } from 'react-redux';
 import ReactDOM from 'react-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faList } from '@fortawesome/free-solid-svg-icons';
+import { Animate, AnimateKeyframes, AnimateGroup } from "react-simple-animate";
 
 class SideBar extends React.Component {
     state = {
@@ -42,20 +45,24 @@ class SideBar extends React.Component {
             <React.Fragment>
             {!sidebar &&
             <div
+            style={{marginLeft: '25px', fontSize: '35px'}}
             className="burgerIcon"
             onClick={this.openDrawer}
             >
-              Sidebar
+              <FontAwesomeIcon icon={faList} />
             </div>
             }
             {sidebar &&
             <React.Fragment>
+            <Animate play={drawerOpen} start={{translateX: '-250px'}} end={{translateX: '0px'}}>
             <div className="blur"></div>
             <div
             onClick={this.openDrawer}
             className="list"
             ref={this.list}
             >
+           
+
                 <ul ref={this.listUl}>
                     <List parent={this.listUl} />
                 </ul>
@@ -64,6 +71,7 @@ class SideBar extends React.Component {
                 >Logout</button>
               
             </div>
+            </Animate>
             </React.Fragment>
             }
             </React.Fragment>

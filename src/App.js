@@ -54,9 +54,9 @@ class App extends React.Component {
           <Switch>
                 <Route exact path="/">
                     <div className="form">
-                      <div className="rowMine">
+                      
                         <Login forceRender={this.forceRender} />
-                      </div>
+                      
                     </div>
                 </Route>       
                 

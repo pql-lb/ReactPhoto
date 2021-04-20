@@ -20,8 +20,13 @@ class Schedule extends React.Component {
         if (useCook) {
         let useCooki = useCook[0].split('=')
         let useCookie = useCooki[1]
-        let userId = localStorage.getItem('userId')
+
+        let useCook2 = document.cookie.match(new RegExp('(^| )' + 'userId' + '=([^;]+)'));
+        console.log(useCook2)
+        let user = useCook2[0].split('=')
+        let userId = user[1]
         let obj = {"userId": userId}
+
         setTimeout(() => {
         fetch('https://multer-test123.herokuapp.com/getScheduled', {
             headers: {

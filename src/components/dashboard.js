@@ -5,6 +5,9 @@ import Info from './info';
 import Loader from './loader';
 import BtnHolder from './btnHolder';
 import ErrorPage from './errorPage';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faHeart } from '@fortawesome/free-solid-svg-icons';
+
 
 const Query = (props) => {
     const location = useLocation();
@@ -74,6 +77,10 @@ class Dashboard extends React.Component {
                                     return (
                                         <div key={i} className={`widget widget${x.number}`}>
                                             <div className="widgImg" style={{backgroundImage: `url(${x.url})`}} />
+                                            <div style={{color: 'rgb(50, 15, 107)', marginTop: '6px', textAlign: 'center', fontFamily: 'poppins'}} className="likes">
+                                                <FontAwesomeIcon icon={faHeart} />
+                                                <span style={{paddingLeft: '5px'}}>{x.likes} </span>
+                                            </div>
                                         </div>
                                     )
                                 }
