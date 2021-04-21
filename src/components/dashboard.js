@@ -65,7 +65,7 @@ class Dashboard extends React.Component {
             return(
                 <div className="dashFlex">
                         {loggedOut ? <Redirect to="/" /> : null}
-                        <Loader top={-100 + "px"} left={0} color="purpleD" scale={1.5} overlay={true} conditions={recentPhotos.length === 0 || name.length === 0 || avatar.length === 0} />
+                        <Loader top={-125 + "px"} left={-25 + 'px'} color="purpleD" scale={1.5} overlay={true} conditions={recentPhotos.length === 0 || name.length === 0 || avatar.length === 0} />
                     
                     <Query setAccess={this.setAccess} />
                     {access &&

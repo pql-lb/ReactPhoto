@@ -3,6 +3,7 @@ import './inputForm.css';
 import { connect } from 'react-redux';
 import SideBar from './sidebar';
 import ErrorPage from './errorPage';
+import DragDrop from './dragDrop';
 
 class Upload extends React.Component {
     state = {
@@ -19,12 +20,20 @@ class Upload extends React.Component {
         })
     }
     handleChangeImg = (e) => {
-        if (e.target.files.length) {
+        let {files} = e.target;
+        if (files.length) {
             this.setState({
-                preview: URL.createObjectURL(e.target.files[0]),
-                file: e.target.files[0]
+                preview: URL.createObjectURL(files[0]),
+                file: files[0]
             })
         }
+    }
+    setImg = (file) => {
+        console.log(file)
+        this.setState({
+            preview: URL.createObjectURL(file),
+            file: file
+        })
     }
     clearImg = () => {
         this.setState({
@@ -115,28 +124,12 @@ class Upload extends React.Component {
                     <input type="text" id="message" value={message} onChange={this.handleChange} />
                     
 
-                    <label style={file !== '' ? {height: "120px"} : {height: "75px"}} className="fileBox" for="file">
-                    {preview ? (
-                        <React.Fragment>
-                        <img src={preview} width="100" height="100" />
-                        <button 
-                        onClick={this.clearImg}
-                        className="clearImg">Change image</button>
-                        </React.Fragment>
-                    ) : (
-                        <div 
-                        id={!hovered ? "shadow1" : "shadow2"}
-                        onMouseEnter={() => this.setState({hovered: true})}
-                        onMouseLeave={() => this.setState({hovered: false})}
-                        className="uploadBtn">Please select an image</div>
-                    )}
-                    </label>
-                    <input type="file" id="file" style={{display: "none"}} onChange={this.handleChangeImg} />
+                   <DragDrop setImg={this.setImg} file={file} preview={preview} clearImg={this.clearImg} hovered={hovered} handleChangeImg={this.handleChangeImg} />
+                    
                     <button 
                     className="btnSubmit"
                     onClick={this.handleUpload}
                     >Upload</button>
-                    <div className={!hovered ? "btnBlur" : "btnBlur2"}></div>
                 </div>
                 <SideBar parent={this.refTwo} />
                 </div>
