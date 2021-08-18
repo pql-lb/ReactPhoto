@@ -2,7 +2,7 @@
   "name": "reactfront",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://lbaker15.github.io/ReactPhoto",
+  "homepage": "http://lbaker15.github.io/ReactPhoto/",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.34",
     "@fortawesome/free-brands-svg-icons": "^5.15.2",
@@ -28,6 +28,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "clean": "gh-pages-clean",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"

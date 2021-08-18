@@ -104,6 +104,8 @@ class Login extends React.Component {
                     let metadata = { type: 'image/jpeg' }
                     let img = new File([file2], "test.jpg", metadata)
                     formData.append('image', img)
+                    console.log(useCookie)
+
                     //Do a test upload
                     new Promise((res, rej) => {
                         fetch('https://multer-test123.herokuapp.com/test', {
@@ -118,14 +120,16 @@ class Login extends React.Component {
                                 res()
                             } else {
                                 if (response.status === 403) {
-                                    data = await response.json()
-                                    this.setState({errorMsg: data.Error})
-                                    setTimeout(() => this.setState({errorMsg: ' '}), 5000)
+                                    console.log(response)
+                                    // data = await response.json()
+                                    // console.log(data)
+                                    // this.setState({errorMsg: data.Error})
+                                    // setTimeout(() => this.setState({errorMsg: ' '}), 5000)
                                 }
                                 rej()
                             }
                         })
-                        .catch(err => console.log(err))
+                        .catch(err => console.log('problem', err))
                     })
                     .then(() => {
                         this.props.forceRender()
@@ -202,7 +206,7 @@ class Login extends React.Component {
         const {emailBlur, instaUser, instaPass, signUp, passwordBlur, nameBlur, instaUserBlur, instaPassBlur, name, hidden, test, email, password, loginAlert, invalidLogin, errorMsg} = this.state;
         return (
             <React.Fragment>
-                <div style={signUp ? {height: '105vh', paddingBottom: 30, marginTop: -85} : null} className="rowMine">
+                <div style={signUp ? {height: '90vh', paddingBottom: 30, marginTop: 15} : null} className="rowMine">
                 {test && !invalidLogin ? <Redirect to="/btnPage" /> : null}
                 
                 {!signUp && (
